@@ -1641,6 +1641,10 @@ class Id3v2
         if (is_array($this->tag_data)) {
             foreach ($this->tag_data as $frame_name => $frame_rawinputdata) {
                 foreach ($frame_rawinputdata as $irrelevantindex => $source_data_array) {
+                    if ($frame_name === 'TXXX') {
+                        $source_data_array['description'] = $irrelevantindex;
+                    }
+
                     if (Tag\Id3v2::IsValidID3v2FrameName($frame_name, $this->majorversion)) {
                         unset($frame_length);
                         unset($frame_flags);
